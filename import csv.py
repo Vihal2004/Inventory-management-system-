@@ -33,7 +33,7 @@ class InventoryManager:
         if len(self.inventory) < initial_length:
             print(f"item '{serial_number}' removed successfully.")
         else:
-            print(f"item with serial number '{serial_number}' not found.")
+            print(f"item with serial number '{serial_number}' not found, try again.")
 
     def generate_report(self):
         with open('inventory_report.csv', 'w', newline='') as file:
@@ -42,7 +42,7 @@ class InventoryManager:
             for item in self.inventory:
                 writer.writerow([item.name, item.quantity, item.location, item.last_maintenance_date,
                                  item.serial_number, item.type])
-            print("Report generated: inventory_report.csv")
+            print("Report generated successfully: inventory_report.csv")
 
 def input_item_details():
     name = input("Enter item Name: ")
@@ -50,9 +50,8 @@ def input_item_details():
     location = input("Enter Location: ")
     last_maintenance_date = input("Enter Last Maintenance Date (YYYY-MM-DD): ")
     serial_number = input("Enter Serial Number: ")
-    category = input("Enter type: ")
-
-    # Validate date format
+    type = input("Enter type: ")
+    
     try:
         datetime.strptime(last_maintenance_date, '%Y-%m-%d')
     except ValueError:
@@ -72,7 +71,7 @@ def main():
         print("4. Generate Report")
         print("5. Exit")
         
-        choice = input("Choose an option: ")
+        choice = input("Select  an option: ")
         
         if choice == '1':
             item = input_item_details()
@@ -93,11 +92,12 @@ def main():
             manager.generate_report()
             
         elif choice == '5':
+            print("Thank you.")
             print("Exiting the program.")
             break
             
         else:
-            print("Invalid choice. Please try again.")
+            print(" Sorry, Invalid selection. Please try again.")
 
 if __name__ == "__main__":
     main()
